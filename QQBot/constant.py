@@ -3,6 +3,7 @@ import os
 from nonebot import CommandSession
 
 project_root = os.path.dirname(os.path.realpath(__file__))
+print('test' + project_root)
 path_storage = os.path.join(project_root, 'storage')
 path_playerList = os.path.join(path_storage, 'playerList.json')
 path_playerProp = os.path.join(path_storage, 'playerProp.json')
@@ -19,19 +20,60 @@ id_pc_not_found = '角色卡未创建，不可加入'
 id_ps_not_find = '状态卡未找到'
 id_ps_not_found = '状态卡未创建，不可见如'
 id_join_succeed = '加入成功'
+magic_column_nothing = '剩余法术位不足，操作失败'
+state_file_used = '[Failed:To GM]修改状态时文档不能处于打开状态！'
+buff_add_have = '已有此buff！'
+buff_remove_not_have = '本来就没有此buff！'
+debuff_add_have = '已有此debuff！'
+debuff_remove_not_have = '本来就没有此debuff！'
+buff_update_succeed = 'buff更改成功'
+debuff_update_succeed = 'debuff更改成功'
+
+su_cannot_join = 'GM/KP不可加入游戏！'
 
 error_info = '处理出错...'
 
+# 帮助文本
+help_content = \
+    'PC指令列表：\n' \
+    '[/join]---加入游戏\n' \
+    '[/roll 2d5]---投掷5面骰子2次\n' \
+    '[/loadpc]---打印角色卡\n' \
+    '[/loadps]---打印状态卡\n' \
+    '[/state]---简易打印状态卡\n' \
+    '[/game]---查看游戏方法'
+
+# GM/KP帮助文本
+super_help_content = \
+    'GM/KP指令列表：\n' \
+    '[/roll 2d5]---投掷5面骰子2次\n' \
+    '[/buff QQ ± buff名]---对应PC±buff\n' \
+    '[/debuff QQ ± debuff名]---对应PC±debuff\n' \
+    '[/health QQ ±5]---对应PC血量±5\n' \
+    '[/maxhealth QQ ±5]---对应PC血量上限±5\n' \
+    '[/magicx QQ 1~9 ±2]--对应PC法术位1~9栏数量±2\n' \
+    '[/sloadpc QQ]---打印角色卡\n' \
+    '[/sloadps QQ]---打印状态卡\n' \
+    '[/sstate QQ]---简易打印状态卡'
+
+game_step = \
+    '[如何使用机器人进行跑团]\n' \
+    '将指定格式的角色卡和状态卡发给我\n' \
+    '确定文件导入后使用[/join]指令加入游戏\n' \
+    '游戏即可\n' \
+    '（暂时没有做退出游戏的方法）\n' \
+    'GM/PC的指定需要我手动操作'
+
 # 该项修改时，此变量下面的方法和相关代码段也要随之修改
 talent = {
-    '天赋1': None,
-    '天赋2': None,
-    '天赋3': None,
-    '天赋4': None,
-    '天赋5': None,
-    '天赋6': None,
-    '天赋7': None,
-    '天赋8': None
+    '力量': None,
+    '敏捷': None,
+    '智力': None,
+    '体质': None,
+    '感知': None,
+    '魅力': None,
+    '属性7': None,
+    '属性8': None
 }
 
 
@@ -40,14 +82,14 @@ def refresh_pc_card(global_talent):
     pc_card['法术'] = None
     pc_card['法术上限'] = None
 
-    global_talent['天赋1'] = None
-    global_talent['天赋2'] = None
-    global_talent['天赋3'] = None
-    global_talent['天赋4'] = None
-    global_talent['天赋5'] = None
-    global_talent['天赋6'] = None
-    global_talent['天赋7'] = None
-    global_talent['天赋8'] = None
+    global_talent['力量'] = None
+    global_talent['敏捷'] = None
+    global_talent['智力'] = None
+    global_talent['体质'] = None
+    global_talent['感知'] = None
+    global_talent['魅力'] = None
+    global_talent['属性7'] = None
+    global_talent['属性8'] = None
 
 
 items = [None] * max_items

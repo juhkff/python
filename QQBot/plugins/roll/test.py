@@ -1,9 +1,9 @@
 import prettytable as pt
+import re
+from plugins.health.data_source import is_number
 
-if __name__ == '__main__':
-    tb = pt.PrettyTable()
-    tb.field_names = ['1环', '2环', '3环', '4环', '5环', '6环', '7环', '8环', '9环']
-    tb.add_row(['4', '3', '0', '0', '0', '0', '0', '0', '0'])
-
-    result = str(tb)
-    print(result)
+if __name__ == '__main__':  # 3d5
+    pattern = re.compile(r'\d+d\d+')
+    test = '5d6a'
+    result = re.fullmatch(pattern, test)
+    print(result is None)

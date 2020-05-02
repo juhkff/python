@@ -146,7 +146,7 @@ def f_format(player_card):
     result += '姓名：' + player_card['姓名'] + ' \t|\t性别：' + player_card['性别'] + '\t|\t年龄：' + player_card['年龄'] + '\n' + \
               '种族：' + player_card.get('种族') + ' \t|\t职业：' + player_card.get('职业') + '\n'
     result += const_row + '\n'
-    result += '天赋\n'
+    result += '属性\n'
     result += const_row + '\n'
     now = 1
     for each in p_talent_keys:
@@ -240,4 +240,24 @@ def fs_format(player_state):
     if len(debuff_list) == 0:
         result += '无\n'
     result += const_row + '\n'
+    return result
+
+
+def fs_simple_format(player_card, player_state):
+    blank = '   '
+    magic_consume_list = player_state['每环法术位']
+    result = player_card + blank + player_state['血量'] + '/' + player_state['血量上限'] + '\n' + \
+             '法术位' + '' + blank + magic_consume_list[0] + ' ' + magic_consume_list[1] + ' ' + magic_consume_list[
+                 2] + '  ' + \
+             magic_consume_list[3] + ' ' + magic_consume_list[4] + ' ' + magic_consume_list[5] + '  ' + \
+             magic_consume_list[6] + ' ' + magic_consume_list[7] + ' ' + magic_consume_list[8] + '\n'
+    result += const_row + '\n'
+    buff_list = player_state['Buff']
+    for each in buff_list:
+        result += each + '  '
+    result += '\n'
+    debuff_list = player_state['Debuff']
+    for each in debuff_list:
+        result += each + '  '
+    result += '\n'
     return result
