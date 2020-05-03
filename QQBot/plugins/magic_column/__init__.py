@@ -14,7 +14,7 @@ from plugins.max_health.data_source import change_max_hp
 async def magic_column(session: CommandSession):
     is_format = session.get('format')
     if not is_format:
-        await session.send('/hpchange 格式错误！')
+        await session.send('/smagic 格式错误！')
         return
     # 格式正确
     change_qq = session.get('change_qq')

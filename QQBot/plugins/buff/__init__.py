@@ -11,7 +11,7 @@ from plugins.health import is_number
 async def buff(session: CommandSession):
     is_format = session.get('format')
     if not is_format:
-        await session.send('/buff 格式错误！/buff QQ ± buff名')
+        await session.send('/sbuff 格式错误！/sbuff QQ ± buff名')
         return
     # 格式正确
     change_qq = int(session.get('change_qq'))

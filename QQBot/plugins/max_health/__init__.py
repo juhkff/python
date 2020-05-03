@@ -13,7 +13,7 @@ from plugins.max_health.data_source import change_max_hp
 async def maxhealth(session: CommandSession):
     is_format = session.get('format')
     if not is_format:
-        await session.send('/maxhealth 格式错误！')
+        await session.send('/smaxhealth 格式错误！')
         return
     # 格式正确
     change_qq = session.get('change_qq')

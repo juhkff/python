@@ -57,7 +57,9 @@ super_help_content = \
     '[/sloadpc QQ]---打印角色卡\n' \
     '[/sloadps QQ]---打印状态卡\n' \
     '[/sstate QQ]---简易打印状态卡\n' \
-    '[/alias 别名 QQ]---增加别名代替较难输的QQ'
+    '[/alias]---查看别名列表\n' \
+    '[/alias add 别名 QQ]---增加别名代替较难输的QQ\n' \
+    '[/alias del 别名]---删除别名'
 
 game_step = \
     '[如何使用机器人进行跑团]\n' \

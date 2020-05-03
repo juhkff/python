@@ -29,9 +29,9 @@ def update_buff(sender_id=int, op_type=str, op_buff=str):
     table = tables[0]
 
     buff_content = table.cell(4, 3).text
-    if buff_content[0] == '\n':
+    if len(buff_content) > 0 and buff_content[0] == '\n':
         buff_content = buff_content[1:]
-    if buff_content[-1] == '\n':
+    if len(buff_content) > 0 and buff_content[-1] == '\n':
         buff_content = buff_content[:-1]
     buff_list = str(buff_content).split('\n')
     result_buff = ''
@@ -54,7 +54,9 @@ def update_buff(sender_id=int, op_type=str, op_buff=str):
             for each in buff_list:
                 if each != op_buff:
                     result_buff += each + '\n'
-    if result_buff[-1] == '\n':
+    if len(result_buff) > 0 and result_buff[0] == '\n':
+        result_buff = result_buff[1:]
+    if len(result_buff) > 0 and result_buff[-1] == '\n':
         result_buff = result_buff[:-1]
     # 将修改后的字符串内容重新写入
     table.cell(4, 3).text = result_buff

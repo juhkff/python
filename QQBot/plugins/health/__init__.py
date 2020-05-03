@@ -12,7 +12,7 @@ from plugins.join.data_source import check_id, join_id, check_pc
 async def health(session: CommandSession):
     is_format = session.get('format')
     if not is_format:
-        await session.send('/hpchange 格式错误！')
+        await session.send('/shealth 格式错误！')
         return
     # 格式正确
     change_qq = session.get('change_qq')

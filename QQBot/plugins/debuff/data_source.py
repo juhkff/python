@@ -29,9 +29,9 @@ def update_debuff(sender_id=int, op_type=str, op_buff=str):
     table = tables[0]
 
     debuff_content = table.cell(5, 3).text
-    if debuff_content[0] == '\n':
+    if len(debuff_content) > 0 and debuff_content[0] == '\n':
         debuff_content = debuff_content[1:]
-    if debuff_content[-1] == '\n':
+    if len(debuff_content) > 0 and debuff_content[-1] == '\n':
         debuff_content = debuff_content[:-1]
     debuff_list = str(debuff_content).split('\n')
     result_debuff = ''
@@ -54,7 +54,9 @@ def update_debuff(sender_id=int, op_type=str, op_buff=str):
             for each in debuff_list:
                 if each != op_buff:
                     result_debuff += each + '\n'
-    if result_debuff[-1] == '\n':
+    if len(result_debuff) > 0 and result_debuff[0] == '\n':
+        result_debuff = result_debuff[1:]
+    if len(result_debuff) > 0 and result_debuff[-1] == '\n':
         result_debuff = result_debuff[:-1]
     # 将修改后的字符串内容重新写入
     table.cell(5, 3).text = result_debuff

@@ -13,7 +13,7 @@ from plugins.health import is_number
 async def debuff(session: CommandSession):
     is_format = session.get('format')
     if not is_format:
-        await session.send('/debuff 格式错误！/debuff QQ ± buff名')
+        await session.send('/sdebuff 格式错误！/sdebuff QQ ± buff名')
         return
     # 格式正确
     change_qq = int(session.get('change_qq'))
