@@ -3,7 +3,7 @@ import os
 from nonebot import CommandSession
 
 project_root = os.path.dirname(os.path.realpath(__file__))
-print('test' + project_root)
+path_alias = os.path.join(project_root, 'alias.ini')
 path_storage = os.path.join(project_root, 'storage')
 path_playerList = os.path.join(path_storage, 'playerList.json')
 path_playerProp = os.path.join(path_storage, 'playerProp.json')
@@ -28,9 +28,11 @@ debuff_add_have = '已有此debuff！'
 debuff_remove_not_have = '本来就没有此debuff！'
 buff_update_succeed = 'buff更改成功'
 debuff_update_succeed = 'debuff更改成功'
-
+new_alias_have = '已有该别名！'
+alias_not_have = '没有该别名！'
 su_cannot_join = 'GM/KP不可加入游戏！'
-
+alias_succeed = '操作成功！'
+alias_fail = '命名失败...'
 error_info = '处理出错...'
 
 # 帮助文本
@@ -47,14 +49,15 @@ help_content = \
 super_help_content = \
     'GM/KP指令列表：\n' \
     '[/roll 2d5]---投掷5面骰子2次\n' \
-    '[/buff QQ ± buff名]---对应PC±buff\n' \
-    '[/debuff QQ ± debuff名]---对应PC±debuff\n' \
-    '[/health QQ ±5]---对应PC血量±5\n' \
-    '[/maxhealth QQ ±5]---对应PC血量上限±5\n' \
-    '[/magicx QQ 1~9 ±2]--对应PC法术位1~9栏数量±2\n' \
+    '[/sbuff QQ ± buff名]---对应PC±buff\n' \
+    '[/sdebuff QQ ± debuff名]---对应PC±debuff\n' \
+    '[/shealth QQ ±5]---对应PC血量±5\n' \
+    '[/smaxhealth QQ ±5]---对应PC血量上限±5\n' \
+    '[/smagic QQ 1~9 ±2]--对应PC法术位1~9栏数量±2\n' \
     '[/sloadpc QQ]---打印角色卡\n' \
     '[/sloadps QQ]---打印状态卡\n' \
-    '[/sstate QQ]---简易打印状态卡'
+    '[/sstate QQ]---简易打印状态卡\n' \
+    '[/alias 别名 QQ]---增加别名代替较难输的QQ'
 
 game_step = \
     '[如何使用机器人进行跑团]\n' \
@@ -72,7 +75,7 @@ talent = {
     '体质': None,
     '感知': None,
     '魅力': None,
-    '属性7': None,
+    '护甲等级': None,
     '属性8': None
 }
 
@@ -88,7 +91,7 @@ def refresh_pc_card(global_talent):
     global_talent['体质'] = None
     global_talent['感知'] = None
     global_talent['魅力'] = None
-    global_talent['属性7'] = None
+    global_talent['护甲等级'] = None
     global_talent['属性8'] = None
 
 

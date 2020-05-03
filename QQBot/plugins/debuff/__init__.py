@@ -3,12 +3,13 @@ from nonebot.permission import SUPERUSER
 
 from constant import id_pc_not_find, buff_add_have, buff_remove_not_have, buff_update_succeed, debuff_add_have, \
     debuff_remove_not_have, debuff_update_succeed, state_file_used
+from plugins.alias.data_source import search_qq_alias
 from plugins.buff.data_source import find_ps, update_buff
 from plugins.debuff.data_source import update_debuff
 from plugins.health import is_number
 
 
-@on_command('debuff', only_to_me=False, permission=SUPERUSER)
+@on_command('sdebuff', only_to_me=False, permission=SUPERUSER)
 async def debuff(session: CommandSession):
     is_format = session.get('format')
     if not is_format:
@@ -59,6 +60,7 @@ async def _(session: CommandSession):
         debuff_name = args[2]
         op_type = args[1]
         qq = args[0]
+        qq = search_qq_alias(qq)
         if not is_number(qq):
             # 不是数字
             session.state['format'] = False

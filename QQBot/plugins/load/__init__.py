@@ -2,6 +2,7 @@ from nonebot import on_command
 from nonebot.permission import GROUP_MEMBER, EVERYBODY, SUPERUSER
 
 from constant import *
+from plugins.alias.data_source import search_qq_alias
 from plugins.health import is_number
 from plugins.join.data_source import check_id, join_id, check_pc
 from plugins.load.data_source import find_pc, read_pc, f_format, find_ps, read_ps, fs_format, fs_simple_format
@@ -60,12 +61,13 @@ async def _(session: CommandSession):
     if len(arg) != 1:
         session.state['format'] = False
         return
-    elif not is_number(arg[0]):
+    elif not is_number(search_qq_alias(arg[0])):
         session.state['format'] = False
         return
     else:
         # arg长度位1
         qq = arg[0]
+        qq = search_qq_alias(qq)
         # 格式正确
         session.state['format'] = True
         session.state['change_qq'] = qq
@@ -124,12 +126,13 @@ async def _(session: CommandSession):
     if len(arg) != 1:
         session.state['format'] = False
         return
-    elif not is_number(arg[0]):
+    elif not is_number(search_qq_alias(arg[0])):
         session.state['format'] = False
         return
     else:
         # arg长度位1
         qq = arg[0]
+        qq = search_qq_alias(qq)
         # 格式正确
         session.state['format'] = True
         session.state['change_qq'] = qq
@@ -192,12 +195,13 @@ async def _(session: CommandSession):
     if len(arg) != 1:
         session.state['format'] = False
         return
-    elif not is_number(arg[0]):
+    elif not is_number(search_qq_alias(arg[0])):
         session.state['format'] = False
         return
     else:
         # arg长度位1
         qq = arg[0]
+        qq = search_qq_alias(qq)
         # 格式正确
         session.state['format'] = True
         session.state['change_qq'] = qq

@@ -3,13 +3,14 @@ from nonebot import on_command, get_bot
 from nonebot.permission import GROUP_MEMBER, SUPERUSER
 
 from constant import *
+from plugins.alias.data_source import search_qq_alias
 from plugins.health.data_source import is_number, find_ps, change_hp
 from plugins.join.data_source import check_id, join_id, check_pc
 from plugins.magic_column.data_source import change_magic_column
 from plugins.max_health.data_source import change_max_hp
 
 
-@on_command('magicx', only_to_me=False, permission=SUPERUSER)
+@on_command('smagic', only_to_me=False, permission=SUPERUSER)
 async def magic_column(session: CommandSession):
     is_format = session.get('format')
     if not is_format:
@@ -60,6 +61,7 @@ async def _(session: CommandSession):
         number = args[2]
         column = args[1]
         qq = args[0]
+        qq = search_qq_alias(qq)
         if not is_number(number):
             # 不是数字
             session.state['format'] = False
