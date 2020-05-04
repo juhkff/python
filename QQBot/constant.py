@@ -1,9 +1,10 @@
+import configparser
 import os
 
 from nonebot import CommandSession
 
 project_root = os.path.dirname(os.path.realpath(__file__))
-path_alias = os.path.join(project_root, 'alias.ini')
+path_settings = os.path.join(project_root, 'gamesettings.ini')
 path_storage = os.path.join(project_root, 'storage')
 path_playerList = os.path.join(path_storage, 'playerList.json')
 path_playerProp = os.path.join(path_storage, 'playerProp.json')
@@ -69,32 +70,36 @@ game_step = \
     '（暂时没有做退出游戏的方法）\n' \
     'GM/PC的指定需要我手动操作'
 
+con = configparser.ConfigParser()
+con.read(path_settings, encoding='gbk')
+pp_list = con.items('playerProp')  # 返回元组
+pp_dict = dict(pp_list)
+pp_num = len(pp_dict)  # 属性数量
+talent = {}  # 创建字典
+for talent_index in pp_dict:
+    talent[pp_dict[talent_index]] = None
+
+
 # 该项修改时，此变量下面的方法和相关代码段也要随之修改
-talent = {
-    '力量': None,
-    '敏捷': None,
-    '智力': None,
-    '体质': None,
-    '感知': None,
-    '魅力': None,
-    '护甲等级': None,
-    '属性8': None
-}
+# talent = {
+#     '力量': None,
+#     '敏捷': None,
+#     '智力': None,
+#     '体质': None,
+#     '感知': None,
+#     '魅力': None,
+#     '护甲等级': None,
+#     '属性8': None
+# }
 
 
-def refresh_pc_card(global_talent):
+def refresh_pc_card():
     # 部分职业没有这两个选项所以要清除
     pc_card['法术'] = None
     pc_card['法术上限'] = None
 
-    global_talent['力量'] = None
-    global_talent['敏捷'] = None
-    global_talent['智力'] = None
-    global_talent['体质'] = None
-    global_talent['感知'] = None
-    global_talent['魅力'] = None
-    global_talent['护甲等级'] = None
-    global_talent['属性8'] = None
+    for index in pp_dict:
+        talent[pp_dict[index]] = None
 
 
 items = [None] * max_items

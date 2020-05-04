@@ -3,7 +3,7 @@ import configparser
 from nonebot import CommandSession, on_command
 from nonebot.permission import SUPERUSER
 
-from constant import path_alias, new_alias_have, alias_not_have, alias_succeed, alias_fail
+from constant import path_settings, new_alias_have, alias_not_have, alias_succeed, alias_fail
 from plugins.alias.data_source import load_alias_as_string, load_alias_as_dict, alias_add, alias_del
 
 

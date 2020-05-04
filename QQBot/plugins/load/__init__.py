@@ -23,7 +23,7 @@ async def load_pc(session: CommandSession):
     player_card = read_pc(sender_id)
     result = str(session.event.sender['card']) + 'の' + f_format(player_card)
     await session.send(result)
-    refresh_pc_card(talent)
+    refresh_pc_card()
 
 
 @on_command('sloadpc', only_to_me=False, permission=SUPERUSER)
@@ -48,7 +48,7 @@ async def s_load_pc(session: CommandSession):
     player_state = read_pc(sender_id)
     result = str(sender_id) + 'の' + f_format(player_state)
     await session.send(result)
-    refresh_pc_card(talent)
+    refresh_pc_card()
 
 
 # s_load_pc.args_parser装饰器将函数声明为s_load_pc命令的参数解析器

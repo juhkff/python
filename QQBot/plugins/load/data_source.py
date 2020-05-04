@@ -198,9 +198,12 @@ def f_format(player_card):
     result += const_row + '\n'
 
     p_items = player_card['物品']
+    num = 0
     for every in p_items:
-        result += every + '；'
-    if len(p_items) > 0:
+        if every != '':
+            result += every + '；'
+            num += 1
+    if num > 0:
         result = result[:-1]
         result += '\n'
     result += const_row + '\n'
