@@ -56,6 +56,7 @@ super_help_content = \
     '[/smaxhealth QQ ±5]---对应PC血量上限±5\n' \
     '[/smagic QQ 1~9 ±2]--对应PC法术位1~9栏数量±2\n' \
     '[/sloadpc QQ]---打印角色卡\n' \
+    '[/sloadpp QQ]---打印角色属性' \
     '[/sloadps QQ]---打印状态卡\n' \
     '[/sstate QQ]---简易打印状态卡\n' \
     '[/alias]---查看别名列表\n' \

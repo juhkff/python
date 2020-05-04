@@ -264,3 +264,38 @@ def fs_simple_format(player_card, player_state):
         result += each + '  '
     result += '\n'
     return result
+
+
+def read_pp(sender_id=int):
+    path = os.path.join(path_storage, str(sender_id))  # storage/qq/
+    des_file = str(sender_id) + '_C.docx'
+    path = os.path.join(path, des_file)  # storage/qq/qq_C.docx
+    document = Document(path)
+    tables = document.tables  # 获取文件中的表格集
+    table = tables[0]
+
+    origin_line = 4  # 天赋起始栏
+    index = 1
+    between_index = 0
+    between = [4, 3, 4, 1]
+    for i in talent:
+        talent[i] = table.cell(origin_line + int((index - 1) / 12), ((index - 1) % 12) + 1).text
+        index += between[between_index]
+        between_index = (between_index + 1) % 4
+
+    return talent
+
+
+def fs_pp_format(player_card, player_pp):
+    result = player_card + 'の属性表：\n'
+    result += const_row + '\n'
+    now = 1
+    for each in player_pp:
+        if now == 1:
+            result += each + '：' + player_pp.get(each) + '\t|\t'
+        if now == 0:
+            result += each + '：' + player_pp.get(each) + '\n'
+        now = (now + 1) % 2
+    if now == 1:
+        result = result[:-1]
+    return result
