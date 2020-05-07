@@ -39,29 +39,35 @@ error_info = '处理出错...'
 # 帮助文本
 help_content = \
     'PC指令列表：\n' \
-    '[/join]---加入游戏\n' \
-    '[/roll 2d5]---投掷5面骰子2次\n' \
-    '[/loadpc]---打印角色卡\n' \
-    '[/loadps]---打印状态卡\n' \
-    '[/state]---简易打印状态卡\n' \
-    '[/game]---查看游戏方法'
+    '[./join]---加入游戏\n' \
+    '[./roll 2d5]---投掷5面骰子2次\n' \
+    '[./loadpc]---打印角色卡\n' \
+    '[./loadps]---打印状态卡\n' \
+    '[./state]---简易打印状态卡\n' \
+    '[./game]---查看游戏方法'
 
 # GM/KP帮助文本
 super_help_content = \
     'GM/KP指令列表：\n' \
-    '[/roll 2d5]---投掷5面骰子2次\n' \
-    '[/sbuff QQ ± buff名]---对应PC±buff\n' \
-    '[/sdebuff QQ ± debuff名]---对应PC±debuff\n' \
-    '[/shealth QQ ±5]---对应PC血量±5\n' \
-    '[/smaxhealth QQ ±5]---对应PC血量上限±5\n' \
-    '[/smagic QQ 1~9 ±2]--对应PC法术位1~9栏数量±2\n' \
-    '[/sloadpc QQ]---打印角色卡\n' \
-    '[/sloadpp QQ]---打印角色属性' \
-    '[/sloadps QQ]---打印状态卡\n' \
-    '[/sstate QQ]---简易打印状态卡\n' \
-    '[/alias]---查看别名列表\n' \
-    '[/alias add 别名 QQ]---增加别名代替较难输的QQ\n' \
-    '[/alias del 别名]---删除别名'
+    '[./roll 2d5]---投掷5面骰子2次\n' \
+    '[./buff QQ ± buff名]---对应PC±buff\n' \
+    '[./debuff QQ ± debuff名]---对应PC±debuff\n' \
+    '[./health QQ ±5]---对应PC血量±5\n' \
+    '[./maxhealth QQ ±5]---对应PC血量上限±5\n' \
+    '[./magic QQ 1~9 ±2]--对应PC法术位1~9栏数量±2\n' \
+    '[./spc QQ]---打印角色卡\n' \
+    '[./spp QQ]---打印角色属性' \
+    '[./sps QQ]---打印状态卡\n' \
+    '[./sst QQ]---简易打印状态卡\n' \
+    '[./alias]---查看别名列表\n' \
+    '[./alias add 别名 QQ]---增加别名代替较难输的QQ\n' \
+    '[./alias del 别名]---删除别名\n' \
+    '[./helpc]---查看角色卡操作'
+
+super_help_content_c = \
+    'GM/KP角色卡指令列表：\n' \
+    '[./pro QQ 已有属性名 ±5]---对应角色属性永久±5\n' \
+    '[./tpro QQ 已有属性名 ±5]---对应角色属性暂时±5'
 
 game_step = \
     '[如何使用机器人进行跑团]\n' \

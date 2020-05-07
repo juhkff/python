@@ -11,7 +11,7 @@ from plugins.roll.data_source import match_roll, roll_times
 async def roll(session: CommandSession):
     is_format = session.get('format')
     if not is_format:
-        await session.send('/roll 格式错误！/roll 次数d范围')
+        await session.send('./roll 格式错误！./roll 次数d范围')
         return
     # 格式正确
     times = int(session.get('times'))

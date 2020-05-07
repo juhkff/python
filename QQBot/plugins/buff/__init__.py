@@ -7,11 +7,11 @@ from plugins.buff.data_source import find_ps, update_buff
 from plugins.health import is_number
 
 
-@on_command('sbuff', only_to_me=False, permission=SUPERUSER)
+@on_command('buff', only_to_me=False, permission=SUPERUSER)
 async def buff(session: CommandSession):
     is_format = session.get('format')
     if not is_format:
-        await session.send('/sbuff 格式错误！/sbuff QQ ± buff名')
+        await session.send('/buff 格式错误！./buff QQ ± buff名')
         return
     # 格式正确
     change_qq = int(session.get('change_qq'))
@@ -27,12 +27,15 @@ async def buff(session: CommandSession):
     except Exception:
         await session.send(state_file_used)
         return
-    bot = get_bot()
-    member_list = await bot.get_group_member_list(group_id=session.event['group_id'])
     card = None
-    for member in member_list:
-        if str(member['user_id']) == str(change_qq):
-            card = member['card']
+    try:
+        bot = get_bot()
+        member_list = await bot.get_group_member_list(group_id=session.event['group_id'])
+        for member in member_list:
+            if str(member['user_id']) == str(change_qq):
+                card = member['card']
+    except Exception:
+        card = change_qq
 
     if result_str == 'Have':
         await session.send('[' + card + ']' + buff_add_have)

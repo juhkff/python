@@ -11,6 +11,11 @@ from plugins.load.data_source import find_pc, read_pc, f_format, find_ps, read_p
 
 @on_command('loadpc', only_to_me=False, permission=GROUP_MEMBER)
 async def load_pc(session: CommandSession):
+    try:
+        test = str(session.event.sender['card'])
+    except Exception:
+        await session.send('此指令为群聊指令，仅在群聊有效！')
+        return
     # 获得发送者的QQ号，检查是否在游戏中，不存在发送错误
     sender_id = session.event.user_id  # 发送者的QQ号
     if check_id(sender_id) is not True:
@@ -27,12 +32,13 @@ async def load_pc(session: CommandSession):
     refresh_pc_card()
 
 
-@on_command('sloadpc', only_to_me=False, permission=SUPERUSER)
+# su打印角色卡
+@on_command('spc', only_to_me=False, permission=SUPERUSER)
 async def s_load_pc(session: CommandSession):
     # 获得发送者的QQ号，检查是否在游戏中，不存在发送错误
     is_format = session.get('format')
     if not is_format:
-        await session.send('/sloadpc 格式错误！')
+        await session.send('./spc格式错误！./spc QQ')
         return
     # 格式正确
     change_qq = session.get('change_qq')
@@ -76,6 +82,11 @@ async def _(session: CommandSession):
 
 @on_command('loadps', only_to_me=False, permission=GROUP_MEMBER)
 async def load_ps(session: CommandSession):
+    try:
+        test = str(session.event.sender['card'])
+    except Exception:
+        await session.send('此指令为群聊指令，仅在群聊有效！')
+        return
     # 获得发送者的QQ号，检查是否在游戏中，不存在发送错误
     sender_id = session.event.user_id  # 发送者的QQ号
     if check_id(sender_id) is not True:
@@ -92,12 +103,13 @@ async def load_ps(session: CommandSession):
     refresh_ps_card()
 
 
-@on_command('sloadps', only_to_me=False, permission=SUPERUSER)
+# su打印状态卡
+@on_command('sps', only_to_me=False, permission=SUPERUSER)
 async def s_load_ps(session: CommandSession):
     # 获得发送者的QQ号，检查是否在游戏中，不存在发送错误
     is_format = session.get('format')
     if not is_format:
-        await session.send('/sstate 格式错误！')
+        await session.send('./sps 格式错误！./sps QQ')
         return
     # 格式正确
     change_qq = session.get('change_qq')
@@ -142,6 +154,11 @@ async def _(session: CommandSession):
 # 状态卡的简易表达形式
 @on_command('state', only_to_me=False, permission=GROUP_MEMBER)
 async def load_ps_simple(session: CommandSession):
+    try:
+        test = str(session.event.sender['card'])
+    except Exception:
+        await session.send('此指令为群聊指令，仅在群聊有效！')
+        return
     # 获得发送者的QQ号，检查是否在游戏中，不存在发送错误
     sender_id = session.event.user_id  # 发送者的QQ号
     if check_id(sender_id) is not True:
@@ -160,12 +177,12 @@ async def load_ps_simple(session: CommandSession):
 
 
 # 状态卡的简易表达形式-GM/KP版
-@on_command('sstate', only_to_me=False, permission=SUPERUSER)
+@on_command('sst', only_to_me=False, permission=SUPERUSER)
 async def s_load_ps_simple(session: CommandSession):
     # 获得发送者的QQ号，检查是否在游戏中，不存在发送错误
     is_format = session.get('format')
     if not is_format:
-        await session.send('/sstate 格式错误！')
+        await session.send('./sst 格式错误！./sst QQ')
         return
     # 格式正确
     change_qq = session.get('change_qq')
@@ -208,14 +225,13 @@ async def _(session: CommandSession):
         session.state['change_qq'] = qq
 
 
-
-# 状态卡的简易表达形式-GM/KP版
-@on_command('sloadpp', only_to_me=False, permission=SUPERUSER)
+# 属性卡的简易表达形式-GM/KP版
+@on_command('spp', only_to_me=False, permission=SUPERUSER)
 async def s_load_pp(session: CommandSession):
     # 获得发送者的QQ号，检查是否在游戏中，不存在发送错误
     is_format = session.get('format')
     if not is_format:
-        await session.send('/sstate 格式错误！')
+        await session.send('./spp 格式错误！./spp QQ')
         return
     # 格式正确
     change_qq = session.get('change_qq')

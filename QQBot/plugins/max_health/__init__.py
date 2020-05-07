@@ -9,18 +9,18 @@ from plugins.join.data_source import check_id, join_id, check_pc
 from plugins.max_health.data_source import change_max_hp
 
 
-@on_command('smaxhealth', only_to_me=False, permission=SUPERUSER)
+@on_command('maxhealth', only_to_me=False, permission=SUPERUSER)
 async def maxhealth(session: CommandSession):
     is_format = session.get('format')
     if not is_format:
-        await session.send('/smaxhealth 格式错误！')
+        await session.send('./maxhealth 格式错误！./maxhealth QQ ±5')
         return
     # 格式正确
     change_qq = session.get('change_qq')
     change_number = session.get('change_number')
     # 在游戏中则寻找状态卡，不存在发送错误
     if find_ps(change_qq) is not True:
-        await session.send(str(session.event.sender['card']) + ' ' + id_pc_not_find)
+        await session.send(str(session.event.sender['card']) + ' ' + id_ps_not_find)
         return
     # 存在状态卡，修改血量，得到最后的字符串
     cur_max_hp = None
@@ -28,13 +28,16 @@ async def maxhealth(session: CommandSession):
         cur_max_hp = change_max_hp(change_qq, change_number)
     except Exception:
         await session.send(state_file_used)
-    bot = get_bot()
-    member_list = await bot.get_group_member_list(group_id=session.event['group_id'])
-    card = None
-    for member in member_list:
-        if str(member['user_id']) == change_qq:
-            card = member['card']
-    await session.send('[' + card + ']' + ' 目前血量为： ' + cur_max_hp)
+    try:
+        bot = get_bot()
+        member_list = await bot.get_group_member_list(group_id=session.event['group_id'])
+        card = None
+        for member in member_list:
+            if str(member['user_id']) == change_qq:
+                card = member['card']
+        await session.send('[' + card + ']' + ' 目前血量为： ' + cur_max_hp)
+    except Exception:
+        await session.send('[' + change_qq + ']' + ' 目前血量为： ' + cur_max_hp)
     return
 
 

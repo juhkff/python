@@ -9,11 +9,11 @@ from plugins.debuff.data_source import update_debuff
 from plugins.health import is_number
 
 
-@on_command('sdebuff', only_to_me=False, permission=SUPERUSER)
+@on_command('debuff', only_to_me=False, permission=SUPERUSER)
 async def debuff(session: CommandSession):
     is_format = session.get('format')
     if not is_format:
-        await session.send('/sdebuff 格式错误！/sdebuff QQ ± buff名')
+        await session.send('/debuff 格式错误！./debuff QQ ± buff名')
         return
     # 格式正确
     change_qq = int(session.get('change_qq'))
@@ -29,12 +29,15 @@ async def debuff(session: CommandSession):
     except Exception:
         await session.send(state_file_used)
         return
-    bot = get_bot()
-    member_list = await bot.get_group_member_list(group_id=session.event['group_id'])
     card = None
-    for member in member_list:
-        if str(member['user_id']) == str(change_qq):
-            card = member['card']
+    try:
+        bot = get_bot()
+        member_list = await bot.get_group_member_list(group_id=session.event['group_id'])
+        for member in member_list:
+            if str(member['user_id']) == str(change_qq):
+                card = member['card']
+    except Exception:
+        card = change_qq
 
     if result_str == 'Have':
         await session.send('[' + card + ']' + debuff_add_have)
