@@ -3,7 +3,7 @@ import os
 
 from docx import Document
 
-from constant import path_settings, path_storage
+from constant import path_settings, path_storage, origin_line
 
 
 # 在ini文件中寻找名称
@@ -37,7 +37,7 @@ def change_pro(sender_id, change_number, pro_name, pro_index):
     index = 1
     between_index = 0
     between = [4, 3, 4, 1]
-    origin_line = 4
+    # origin_line = 4
     for i in range(1, pro_index):
         index += between[between_index]
         between_index = (between_index + 1) % 4

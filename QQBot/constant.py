@@ -1,4 +1,5 @@
 import configparser
+import math
 import os
 
 from nonebot import CommandSession
@@ -9,7 +10,7 @@ path_storage = os.path.join(project_root, 'storage')
 path_playerList = os.path.join(path_storage, 'playerList.json')
 path_playerProp = os.path.join(path_storage, 'playerProp.json')
 
-max_items = 8
+# max_items = 8
 
 # const_row = '---------------------------------------------------------------------------------'
 const_row = '-----------------------'
@@ -27,8 +28,11 @@ buff_add_have = '已有此buff！'
 buff_remove_not_have = '本来就没有此buff！'
 debuff_add_have = '已有此debuff！'
 debuff_remove_not_have = '本来就没有此debuff！'
+item_add_have = '已有此物品！'
+item_remove_not_have = '本来就没有此物品！'
 buff_update_succeed = 'buff更改成功'
 debuff_update_succeed = 'debuff更改成功'
+item_update_succeed = '物品栏更改成功'
 new_alias_have = '已有该别名！'
 alias_not_have = '没有该别名！'
 su_cannot_join = 'GM/KP不可加入游戏！'
@@ -85,6 +89,14 @@ pp_num = len(pp_dict)  # 属性数量
 talent = {}  # 创建字典
 for talent_index in pp_dict:
     talent[pp_dict[talent_index]] = None
+origin_line = 4  # 天赋起始栏
+master_line = origin_line - 1 + math.ceil(len(talent) / 4) + 1  # 推算精通所在行
+degree_line = master_line + 1  # 推算职业等级所在行
+tricks_line = degree_line + 1  # 推算戏法所在行
+magic_line = tricks_line + 1  # 推算法术所在行
+max_trick_and_magic_line = magic_line + 1  # 推算戏法和法术上限所在行
+info_row = max_trick_and_magic_line + 2  # 推算人物介绍所在行
+item_row = info_row + 2  # 推算物品所在行
 
 
 # 该项修改时，此变量下面的方法和相关代码段也要随之修改
@@ -109,7 +121,7 @@ def refresh_pc_card():
         talent[pp_dict[index]] = None
 
 
-items = [None] * max_items
+# items = [None] * max_items
 
 # 角色卡
 pc_card = {
@@ -146,9 +158,8 @@ def refresh_ps_card():
     ps_card['Buff'] = None
     ps_card['Debuff'] = None
 
-
-for i in range(max_items):
-    pc_card['物品'] = items
+# for i in range(max_items):
+#    pc_card['物品'] = items
 # def check_private(session: CommandSession):
 #     message_type = session.event.sub_type
 #     if message_type != 'group':

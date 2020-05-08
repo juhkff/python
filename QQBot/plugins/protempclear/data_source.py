@@ -24,9 +24,9 @@ def search_name_in_settings(name):
     return [False, None, None]
 
 
-def temp_change_pro(sender_id, change_number, pro_name, pro_index):
+def temp_change_pro(sender_id, pro_name, pro_index):
     pro_index = int(pro_index)
-    difference = int(change_number)
+
     path = os.path.join(path_storage, str(sender_id))  # storage/qq/
     des_file = str(sender_id) + '_C.docx'
     path = os.path.join(path, des_file)  # storage/qq/qq_C.docx
@@ -53,6 +53,8 @@ def temp_change_pro(sender_id, change_number, pro_name, pro_index):
         split_list = str(origin_content).split('(')
         origin_number = int(split_list[0])
         origin_extra = str(split_list[1]).split(')')[0]  # '+5/0'
+        origin_extra_number = int(origin_extra)
+        difference = 0 - origin_extra_number
         result_number = str(origin_number + difference)
         # (左边处理完毕，结果为str变量result_number
         # 开始处理(右边,初始有str变量origin_extra，可能值有0/+5/-3

@@ -1,7 +1,8 @@
 from nonebot import on_command, CommandSession, get_bot
 from nonebot.permission import SUPERUSER
 
-from constant import id_pc_not_find, buff_add_have, buff_remove_not_have, buff_update_succeed, state_file_used
+from constant import id_pc_not_find, buff_add_have, buff_remove_not_have, buff_update_succeed, state_file_used, \
+    id_ps_not_find
 from plugins.alias.data_source import search_qq_alias
 from plugins.buff.data_source import find_ps, update_buff
 from plugins.health import is_number
@@ -19,7 +20,7 @@ async def buff(session: CommandSession):
     buff_name = session.get('buff_name')
     # 在游戏中则寻找状态卡，不存在发送错误
     if find_ps(change_qq) is not True:
-        await session.send(str(session.event.sender['card']) + ' ' + id_pc_not_find)
+        await session.send(str(session.event.sender['card']) + ' ' + id_ps_not_find)
         return
     # 存在状态卡
     try:
@@ -35,7 +36,7 @@ async def buff(session: CommandSession):
             if str(member['user_id']) == str(change_qq):
                 card = member['card']
     except Exception:
-        card = change_qq
+        card = str(change_qq)
 
     if result_str == 'Have':
         await session.send('[' + card + ']' + buff_add_have)

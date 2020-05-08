@@ -4,7 +4,8 @@ import prettytable as pt
 
 from docx import Document
 
-from constant import path_storage, pc_card, talent, max_items, items, const_row, ps_card
+from constant import path_storage, pc_card, talent, const_row, ps_card, origin_line, master_line, \
+    degree_line, tricks_line, magic_line, max_trick_and_magic_line, info_row, item_row
 
 
 def find_pc(sender_id=int):
@@ -39,65 +40,68 @@ def read_pc(sender_id=int):
     pc_card['年龄'] = table.cell(1, 12).text
     pc_card['种族'] = table.cell(2, 1).text
     pc_card['职业'] = table.cell(2, 8).text
-    origin_line = 4  # 天赋起始栏
+    # origin_line = 4  # 天赋起始栏
     index = 1
     between_index = 0
-    between = [4, 3, 4, 1]
+    between = [3, 3, 2, 1]
     for i in talent:
-        talent[i] = table.cell(origin_line + int((index - 1) / 12), ((index - 1) % 12) + 1).text
+        talent[i] = table.cell(origin_line + int((index - 1) / 9), ((index - 1) % 9) + 1).text
         index += between[between_index]
         between_index = (between_index + 1) % 4
     pc_card['天赋'] = talent
-    master_line = origin_line - 1 + math.ceil(len(talent) / 4) + 1  # 推算精通所在行
+    # master_line = origin_line - 1 + math.ceil(len(talent) / 4) + 1  # 推算精通所在行
     master_content = table.cell(master_line, 4).text  # 精通内容（纯文本）
     master_list = str(master_content).split('\n')
     pc_card['精通'] = master_list
-    degree_line = master_line + 1  # 推算职业等级所在行
+    # degree_line = master_line + 1  # 推算职业等级所在行
     degree = table.cell(degree_line, 6).text
     degree_develop = table.cell(degree_line, 10).text
     pc_card['职业等级'] = degree
     pc_card['熟练加值'] = degree_develop
-    tricks_line = degree_line + 1  # 推算戏法所在行
+    # tricks_line = degree_line + 1  # 推算戏法所在行
     tricks_content = table.cell(tricks_line, 4).text  # 戏法内容
     tricks_list = str(tricks_content).split('\n')
     pc_card['戏法'] = tricks_list
-    magic_line = tricks_line + 1  # 推算法术所在行
+    # magic_line = tricks_line + 1  # 推算法术所在行
     magic_content = table.cell(magic_line, 4).text  # 法术内容
     magic_list = str(magic_content).split('\n')
     pc_card['法术'] = magic_list
-    max_trick_and_magic_line = magic_line + 1  # 推算戏法和法术上限所在行
+    # max_trick_and_magic_line = magic_line + 1  # 推算戏法和法术上限所在行
     max_trick = table.cell(max_trick_and_magic_line, 6).text
     max_magic = table.cell(max_trick_and_magic_line, 10).text
     pc_card['戏法上限'] = max_trick
     pc_card['法术上限'] = max_magic
     # info_row = 2 + math.ceil(len(talent) / 4) + 2  # 推算人物介绍所在行
-    info_row = max_trick_and_magic_line + 2  # 推算人物介绍所在行
+    # info_row = max_trick_and_magic_line + 2  # 推算人物介绍所在行
     pc_card['人物介绍'] = table.cell(info_row, 0).text
     print(pc_card['人物介绍'])
-    cur_items = [None] * max_items
-    item_row = info_row + 2  # 推算物品所在行
-    index = 0  # 有效物品计数
-    cur_index = 0
-    i_between = [2, 6, 3, 2]
-    i_between_index = 0
-    num = 0
-    for j in range(max_items):
-        cur_items[index] = table.cell(item_row + int(cur_index / 13),
-                                      cur_index % 13).text  # 0->0,0  1->0,2  2->0,5  3->0,8  4->1,0
-        if cur_items[index] is not None:
-            num += 1
-        index += 1
-        cur_index += i_between[i_between_index]
-        i_between_index = (i_between_index + 1) % 4
+    # cur_items = [None] * max_items
+    # item_row = info_row + 2  # 推算物品所在行
+    # index = 0  # 有效物品计数
+    # cur_index = 0
+    # i_between = [2, 6, 3, 2]
+    # i_between_index = 0
+    # num = 0
+    # for j in range(max_items):
+    #     cur_items[index] = table.cell(item_row + int(cur_index / 13),
+    #                                   cur_index % 13).text  # 0->0,0  1->0,2  2->0,5  3->0,8  4->1,0
+    #     if cur_items[index] is not None:
+    #         num += 1
+    #     index += 1
+    #     cur_index += i_between[i_between_index]
+    #     i_between_index = (i_between_index + 1) % 4
+    item_content = str(table.cell(item_row, 0).text)  # 物品栏内容
+    item_list = item_content.split()  # 以空格分割
 
-    final_items = [None] * num
-    f_index = 0
-    for f_i in range(max_items):
-        if cur_items[f_i] is not None:
-            final_items[f_index] = cur_items[f_i]
-            f_index += 1
+    # final_items = [None] * num
+    # f_index = 0
+    # for f_i in range(max_items):
+    #     if cur_items[f_i] is not None:
+    #         final_items[f_index] = cur_items[f_i]
+    #         f_index += 1
 
-    pc_card['物品'] = final_items
+    # pc_card['物品'] = final_items
+    pc_card['物品'] = item_list
     return pc_card
 
 
@@ -274,15 +278,14 @@ def read_pp(sender_id=int):
     tables = document.tables  # 获取文件中的表格集
     table = tables[0]
 
-    origin_line = 4  # 天赋起始栏
+    # origin_line = 4  # 天赋起始栏
     index = 1
     between_index = 0
-    between = [4, 3, 4, 1]
+    between = [3, 3, 2, 1]
     for i in talent:
-        talent[i] = table.cell(origin_line + int((index - 1) / 12), ((index - 1) % 12) + 1).text
+        talent[i] = table.cell(origin_line + int((index - 1) / 9), ((index - 1) % 9) + 1).text
         index += between[between_index]
         between_index = (between_index + 1) % 4
-
     return talent
 
 
